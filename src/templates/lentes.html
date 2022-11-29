@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .menu .box-container .box:hover {
+  background: transparent;
+}
+    </style>
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="inicio" class="logo">
+        <img src="/static/images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+        
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </div>
+
+    <div class="cart-items-container">
+        <div id="carrito-items"></div>
+        {% if session.get('username') %}
+        <a href="#" onclick="comprar()" class="btn">Realizar pedido</a>
+        {% else %}
+        <a href="login" class="btn">Inicia sesión para continuar</a>
+        {% endif %}
+    </div>
+
+</header>
+
+<!-- header section ends -->
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h1 class="heading"> <span>about</span> us </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="/static/images/conta0.png" alt="">
+        </div>
+
+        <div class="content">
+            <h3 style="text-align:center">Lentes de contacto</h3>
+            <p style="text-align:center"> La mejor opcion para cuando necesitamos un descanso de las gafas </p>
+            <p></p>
+            
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+<!-- menu section starts  -->
+
+<section class="menu" id="menu">
+
+    <h1 class="heading"> NUESTROS <span>LENTES DE CONTACTO</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="/static/images/menu-1.png" alt="">
+            <h3> Heart pupil</h3>
+            <div class="price">$105.000 <span>125.000</span></div>
+            <a href="#" class="btn">Agregar a carrito</a>
+        </div>
+
+        <div class="box">
+            <img src="/static/images/menu-2.png" alt="">
+            <h3>Gris fantasia</h3>
+            <div class="price">$95.000 <span>$115.000</span></div>
+            <a href="#" class="btn">Agregar a carrito</a>
+        </div>
+
+        <div class="box">
+            <img src="/static/images/menu-3.png" alt="">
+            <h3>tasty and healty</h3>
+            <div class="price">$15.99 <span>20.99</span></div>
+            <a href="#" class="btn">Agregar a carrito</a>
+        </div>
+
+        <div class="box">
+            <img src="/static/images/menu-4.png" alt="">
+            <h3>Azul brillante</h3>
+            <div class="price">$59.000 <span>$75.000</span></div>
+            <a href="#" class="btn">Agregar a carrito</a>
+        </div>
+
+        <div class="box">
+            <img src="/static/images/menu-5.png" alt="">
+            <h3>Safiro</h3>
+            <div class="price">$82.000 <span>$95.000</span></div>
+            <a href="#" class="btn">add to cart</a>
+        </div>
+
+        <div class="box">
+            <img src="/static/images/menu-6.png" alt="">
+            <h3>Gris claro</h3>
+            <div class="price">$92.000 <span>$120.000</span></div>
+            <a href="#" class="btn">Agregar a carrito</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- menu section ends -->
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+
+    <div class="links">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+    </div>
+
+    <div class="credit">Derechos de autor reversados por Optiplus <span></span></div>
+</section>
+
+<!-- footer section ends -->
+<!-- custom js file link  -->
+<script src="/static/js/script.js"></script>
+<script src="/static/js/loadProd.js"></script>
+<script>
+    loadProducts('contactos');
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="inicio" class="logo">
+        <img src="/static/images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="getProducts">Ver Productos</a>
+        <a href="createProducts">Crear Productos</a>
+        <a href="getPedidos">Pedidos</a>
+        <a href="logout">Cerrar sesión</a>
+        
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+
+
+    <div class="cart-items-container">
+        <div id="carrito-items"></div>
+        {% if session.get('username') %}
+        <a href="#" class="btn">Realizar pedido</a>
+        {% else %}
+        <a href="login" class="btn">Inicia sesión para continuar</a>
+        {% endif %}
+    </div>
+
+</header>
+<style>
+    .home{
+        align-items: center;
+        justify-content: center;
+    }
+    .box{
+        font-size: large;
+        background-color: white;
+        width: 800px;
+        height: 600px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 20px;
+        overflow:auto;
+    }
+    .h3{
+        font-size: 1.75rem;
+        text-align: center;
+        margin-top: 20px;
+        margin-right: 20px;
+    }
+    .tableImg{
+        width: 50px;
+        height: 50px
+    }
+    td{
+        padding: 10px;
+    }
+</style>
+<section class="home" id="home">
+    <div class="box">
+        <h3 class="h3">Productos</h3>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Imagen</td>
+                    <td>Nombre</td>
+                    <td>Precio venta</td>
+                    <td>Precio compra</td>
+                    <td>Existencia</td>
+                    <td>Categoría</td>
+                    <td>Acción</td>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- custom js file link  -->
+<script src="/static/js/script.js"></script>
+<script>
+    const tbody = document.getElementById('tbody')
+    fetch('/productos',)
+    .then(content=>content.json())
+    .then(content=>{
+        content.productos.forEach(element => {
+            tbody.innerHTML += `
+            <tr>
+                <td>${element.idProducto}</td>
+                <td><img src="${element.image}" class="tableImg"></td>
+                <td>${element.nombre}</td>
+                <td>${element.precioVenta}</td>
+                <td>${element.precioCompra}</td>
+                <td>${element.existencias}</td>
+                <td>${element.categoria}</td>
+                <td>
+                    <a href="editar/${element.idProducto}">editar</a><br>
+                    <a href="javascript:void" onclick="deleteProduct('${element.idProducto}')">eliminar</a>
+                </td>
+            </tr>
+            `
+       });
+    })
+    function deleteProduct(id){
+        fetch('/productos/del/' + id).then(data => data.json())
+        .then(data=>{
+            alert(data.mensaje)
+            if (data.exito === true){
+                location.reload()
+            }
+        })
+    }
+    
+</script>
+
+</body>
+</html>

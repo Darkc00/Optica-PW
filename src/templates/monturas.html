@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="inicio" class="logo">
+        <img src="/static/images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+        
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </div>
+
+    <div class="cart-items-container">
+        <div id="carrito-items"></div>
+        {% if session.get('username') %}
+        <a href="#" onclick="comprar()" class="btn">Realizar pedido</a>
+        {% else %}
+        <a href="login" class="btn">Inicia sesión para continuar</a>
+        {% endif %}
+    </div>
+
+</header>
+
+<!-- header section ends -->
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h1 class="heading"> <span>about</span> us </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="/static/images/montura0.png" alt="">
+        </div>
+
+        <div class="content">
+            <h3 style="text-align:center">Monturas y Lentes formulados</h3>
+            <p style="text-align:center">Todas nuestras gafas incluyen estuche y paño en microfibra ideal para la limpieza y cuidado de lentes</p>
+            <p style="text-align:center"> Nuestras monturas se pueden adaptar a tu formula medica previa o realizar nuevas. </p>
+           
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- blogs section starts  -->
+
+<section class="blogs" id="blogs">
+
+    <h1 class="heading"> NUESTRAS <span> MONTURAS</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div class="image">
+                <img src="/static/images/montura-1.png" alt="">
+            </div>
+            <div class="content">
+                <a  href="#" class="title" >CUBIK</a>
+                <p>Material: Acetato, TR90, Pasta</p>
+                <p>Colores: Rosado, Verde, Azul</p>
+                <div class="price">$76.000 <span>$67.000</span></div>
+                <a href="#" class="btn">Agregar a carrito</a>
+                
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="/static/images/montura-2.png" alt="">
+            </div>
+            <div class="content">
+                <a href="#" class="title">DOWEL</a>
+                
+                <p>Material: Acetato, TR90</p>
+                <p>Colores: Negro, Azul</p>
+                <div class="price">$57.000 <span>$58.000</span></div>
+                <a href="#" class="btn">Agregar al carrito</a>
+                
+                
+            </div>
+
+            
+            
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="/static/images/montura-3.png" alt="">
+            </div>
+            <div class="content">
+                <a href="#" class="title">DAKOTA</a>
+                <p>Material: TR90</p>
+                <p>Colores: Negro, Naranja</p>
+                <div class="price">$87.000 <span>$87.000</span></div>
+                <a href="#" class="btn">Agregar al carrito</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- blogs section ends -->
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+
+    <div class="links">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+    </div>
+
+    <div class="credit">Derechos de autor reversados por Optiplus <span></span></div>
+</section>
+
+<!-- footer section ends -->
+
+<!-- custom js file link  -->
+<script src="/static/js/script.js"></script>
+<script src="/static/js/loadProd.js"></script>
+<script>
+    loadProducts('monturas');
+</script>
+</body>
+</html>
+
+
+

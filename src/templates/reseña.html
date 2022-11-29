@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="inicio" class="logo">
+        <img src="/static/images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+        
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </div>
+
+    <div class="cart-items-container">
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="/static/images/cart-item-1.png" alt="">
+            <div class="content">
+                <h3>Gafas de bebe rosadas </h3>
+                <div class="price">$35.000/-</div>
+            </div>
+        </div>
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="/static/images/cart-item-2.png" alt="">
+            <div class="content">
+                <h3>DIVA</h3>
+                <div class="price">$45.000/-</div>
+            </div>
+        </div>
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="/static/images/cart-item-3.png" alt="">
+            <div class="content">
+                <h3>Rojo Fantasia</h3>
+                <div class="price">$95.000/-</div>
+            </div>
+        </div>
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="/static/images/menu-3.png" alt="">
+            <div class="content">
+                <h3> Amarillo fantasia </h3>
+                <div class="price">$86.000/-</div>
+            </div>
+        </div>
+        <a href="#" onclick="comprar()" class="btn">Realizar pedido</a>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+<!-- review section starts  -->
+
+<section class="review" id="review">
+    <h1 class="heading"> NUESTROS <span>LENTES DE CONTACTO</span> </h1>
+    <h1 class="heading"> NUESTRAS <span>RESEÑAS</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="/static/images/quote-img.png" alt="" class="quote">
+            <p>"La mejor clínica, me brindó la seguridad de estar en las mejores manos. La atención es excelente."</p>
+            <img src="/static/images/review-2.jpeg" class="user" alt="">
+            <h3>Harry Styles</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="/static/images/quote-img.png" alt="" class="quote">
+            <p>"La atención es excelente desde el primer contacto, cada persona que me atendió me brindó una gran experiencia."</p>
+            <img src="/static/images/review-1.jpeg" class="user" alt="">
+            <h3>Adaymis Campo</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+        </div>
+        
+        <div class="box">
+            <img src="/static/images/quote-img.png" alt="" class="quote">
+            <p>"Tienen muy buena variedad de monturas, lentes de contacto, gotas oftalmológicas, me encanto todo"</p>
+            <img src="/static/images/review-3.jpeg" class="user" alt="">
+            <h3>Taylor Swift</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- review section ends -->
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+
+    <div class="links">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+    </div>
+
+    <div class="credit">Derechos de autor reversados por Optiplus <span></span></div>
+
+</section>
+
+<!-- footer section ends -->
+<!-- custom js file link  -->
+<script src="/static/js/script.js"></script>
+<script src="/static/js/loadProd.js"></script>
+</body>
+</html>

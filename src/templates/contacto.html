@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="inicio" class="logo">
+        <img src="/static/images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+        
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </div>
+
+    <div class="cart-items-container">
+        <div id="carrito-items"></div>
+        {% if session.get('username') %}
+        <a href="#" onclick="comprar()" class="btn">Realizar pedido</a>
+        {% else %}
+        <a href="login" class="btn">Inicia sesión para continuar</a>
+        {% endif %}
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+    
+    <h1 class="heading"> <span>contact</span> us </h1>
+    <h1 class="heading"> <span>Contacta</span> Con nosotros </h1>
+   
+
+    <div class="row">
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.4680987526294!2d-74.83742848513354!3d11.003463092167658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42c5637f872c1%3A0xdd0e9b065f5c2166!2zRMOtc2NvbG8!5e0!3m2!1ses!2sco!4v1662527478791!5m2!1ses!2sco" allowfullscreen="" loading="lazy" ></iframe>
+        <form action="">
+            <h3>Agenda citas y mas</h3>
+            <div class="inputBox">
+                <span class="fas fa-user"></span>
+                <input type="text" placeholder="nombre">
+            </div>
+            <div class="inputBox">
+                <span class="fas fa-envelope"></span>
+                <input type="email" placeholder="correo">
+            </div>
+            <div class="inputBox">
+                <span class="fas fa-phone"></span>
+                <input type="number" placeholder="telefono">
+            </div>
+            <input type="submit" value="Contactar" class="btn">
+        </form>
+
+    </div>
+
+</section>
+
+<!-- contact section ends -->
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+
+    <div class="links">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+    </div>
+
+    <div class="credit">Derechos de autor reversados por Optiplus <span></span></div>
+</section>
+
+<!-- footer section ends -->
+<!-- custom js file link  -->
+<script src="/static/js/script.js"></script>
+<script src="/static/js/loadProd.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="inicio" class="logo">
+        <img src="/static/images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="inicio">Inicio</a>
+        <a href="gafas-sol">Gafas de sol</a>
+        <a href="monturas">Monturas</a>
+        <a href="lentes">Lentes Contacto</a>
+        <a href="reseña">Reseñas</a>
+        <a href="contacto">Contacto</a>
+        {% if not session.get('username') %}
+        <a href="login">Inicio sesión</a>
+        <a href="register">Registrarse</a>
+        {% else %}
+        <a href="logout">Cerrar sesión</a>
+        {% endif %}
+        
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </div>
+
+    <div class="cart-items-container">
+        <div id="carrito-items"></div>
+        {% if session.get('username') %}
+        <a href="#" onclick="comprar()" class="btn">Realizar pedido</a>
+        {% else %}
+        <a href="login" class="btn">Inicia sesión para continuar</a>
+        {% endif %}
+    </div>
+
+</header>
+<style>
+    .home{
+        align-items: center;
+        justify-content: center;
+    }
+    .box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: large;
+        background-color: white;
+        width: 350px;
+        height: 400px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 20px;
+    }
+    .h3{
+        font-size: 1.75rem;
+        text-align: center;
+    }
+    #login-form{
+        width: 70%;
+
+    }
+    .form-control{
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: .375rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+</style>
+<section class="home" id="home">
+    <div class="box">
+        
+        <form id="register-form" class="mx-auto text-center" style="width: 70%">
+            <h3 class="h3">Registro</h3>
+            <label for="nombre">Nombre</label>
+            <input class="form-control mb-2" type="text" id="nombre" name="nombre">
+            <label for="username">Cedula</label>
+            <input class="form-control mb-2" type="text" id="username" name="cedula">
+            <label for="password">Contraseña</label>
+            <input class="form-control mb-2" id="password" type="password" name="password">
+            <label for="genero">Genero</label>
+            <select name="genero" id="genero" class="form-control">
+                 <option value="m">Masculino</option>
+                 <option value="f">Femenino</option>
+            </select>
+            <label for="celular">celular</label>
+            <input class="form-control mb-2" id="celular" type="num" name="celular">
+            <label for="fechaNacimiento">Fecah de nacimiento</label>
+            <input class="form-control mb-2" id="fechaNacimiento" type="date" name="fechaNacimiento">
+            <input class="btn btn-primary mt-3 mx-auto" type="button" value="Registrarse" onclick="registrarse()">
+        </form>
+    </div>
+</section>
+
+<!-- custom js file link  -->
+<script src="/static/js/script.js"></script>
+<script>
+    function registrarse(){
+            const formData = new FormData(document.getElementById('register-form'))
+            let object = {};
+            formData.forEach((value, key) => object[key] = value);
+            fetch('/clientes', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(object)
+            }).then(content=>content.json())
+            .then(content=>{
+                alert(content.mensaje)
+                if (content.exito === true){
+                    alert("Usuario registrado exitosamente")
+                    location.href="/login"
+                }
+            })
+
+    }
+</script>
+
+</body>
+</html>

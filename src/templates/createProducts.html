@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="inicio" class="logo">
+        <img src="/static/images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="getProducts">Ver Productos</a>
+        <a href="createProducts">Crear Productos</a>
+        <a href="getPedidos">Pedidos</a>
+        <a href="logout">Cerrar sesión</a>
+        
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+
+    <div class="cart-items-container">
+        <div id="carrito-items"></div>
+        {% if session.get('username') %}
+        <a href="#" onclick="comprar()" class="btn">Realizar pedido</a>
+        {% else %}
+        <a href="login" class="btn">Inicia sesión para continuar</a>
+        {% endif %}
+    </div>
+
+</header>
+<style>
+    .home{
+        align-items: center;
+        justify-content: center;
+    }
+    .box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: large;
+        background-color: white;
+        width: 350px;
+        height: calc(fit-content+30px);
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .h3{
+        font-size: 1.75rem;
+        text-align: center;
+    }
+    #login-form{
+        width: 70%;
+
+    }
+    .form-control{
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: .375rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+</style>
+<section class="home" id="home">
+    <div class="box">    
+        <form id="register-form" class="mx-auto text-center" style="width: 70%">
+            <h3 class="h3">CREAR PRODUCTOS</h3>
+            <label for="nombre">Nombre</label>
+            <input class="form-control mb-2" type="text" id="nombre" name="nombre">
+            <label for="descripcion">Descripcion</label>
+            <textarea class="form-control mb-2" type="text" id="descripcion" name="descripcion"></textarea>   
+            <label for="precioVenta">Precio de Venta</label>
+            <input class="form-control mb-2" id="precioVenta" type="num" name="precioVenta">
+            <label for="precioCompra">Precio de Compra</label>
+            <input class="form-control mb-2" id="precioCompra" type="num" name="precioCompra">
+            <label for="existencias">Existencias</label>
+            <input class="form-control mb-2" id="existencias" type="num" name="existencias">
+            <label for="categoria">Categoría</label>
+            <select class="form-control mb-2" id="categoria" name="categoria">
+                <option value="contactos">Lentes de contacto</option>
+                <option value="monturas">Monturas</option>
+                <option value="sol">Lentes de sol</option>
+            </select>
+            <label for="image">Link de imágen</label>
+            <input class="form-control mb-2" id="image" type="text" name="image">
+            <input id="btn" class="btn btn-primary mt-3 mx-auto" type="button" value="Crear Producto" onclick="registrarse()">
+        </form>
+    </div>
+</section>
+<!-- custom js file link  -->
+<script src="/static/js/script.js"></script>
+<script>
+    let prod_id = '';
+    function registrarse(){
+        if(prod_id === ''){
+            link = '/productos'
+        }else{
+            link = '/productos/update/' + prod_id
+        }
+        const formData = new FormData(document.getElementById('register-form'))
+        let object = {};
+        formData.forEach((value, key) => object[key] = value);
+        fetch(link, {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        }).then(content=>content.json())
+        .then(content=>{
+            alert(content.mensaje)
+            if (content.exito){
+                location.href="/getProducts"
+            }
+        })
+
+    }
+</script>
+{% if id_prod %}
+<script>
+    prod_id = '{{id_prod}}';
+    fetch('/productos/{{id_prod}}')
+    .then(content=>content.json())
+    .then(content=>{
+        console.log(content)
+        document.getElementById('nombre').value = content.producto.nombre
+        document.getElementById('descripcion').value = content.producto.descripcion
+        document.getElementById('precioVenta').value = content.producto.precioVenta
+        document.getElementById('precioCompra').value = content.producto.precioCompra
+        document.getElementById('existencias').value = content.producto.existencias
+        document.getElementById('categoria').value = content.producto.categoria
+        document.getElementById('image').value = content.producto.image
+        document.getElementById('btn').value = "Actualizar Producto"
+    })
+</script>
+{% endif %}
+
+
+</body>
+</html>
